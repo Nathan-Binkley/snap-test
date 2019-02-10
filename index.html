@@ -2,13 +2,15 @@
 <html lang="en">
   <body>
     <div id="my-login-button-target" />
+    <div id="name" />
     <script>
        window.snapKitInit = function () {
         var loginButtonIconId = 'my-login-button-target';
+        var namePlaceId = 'name';
         // Mount Login Button
         snap.loginkit.mountButton(loginButtonIconId, {
           clientId: '15d588d0-e7c5-4409-8188-1a74743bfe17',
-          redirectURI: 'https://example.com',
+          redirectURI: 'https://auth.snapchat.com/oauth2/api/user.display_name',
           scopeList: [
             'user.display_name',
             'user.bitmoji.avatar',
@@ -16,6 +18,7 @@
           handleResponseCallback: function() {
             snap.loginkit.fetchUserInfo()
               .then(data => console.log('User info:', data));
+              namePlaceId.innerhtml=data;
           },
         });
       };
